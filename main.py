@@ -9,7 +9,7 @@ WIDTH, HEIGHT = 300, 600
 BLOCK_SIZE = 30
 COLUMNS = WIDTH // BLOCK_SIZE
 ROWS = HEIGHT // BLOCK_SIZE
-FPS = 3
+FPS = 1
 
 # Цвета
 BLACK = (0, 0, 0)
@@ -17,21 +17,25 @@ WHITE = (255, 255, 255)
 COLORS = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (0, 255, 255), (255, 0, 255)]
 
 # Фигуры тетриса
-SHAPES = [
-    [[1, 1, 1, 1]],
-    [[1, 1], [1, 1]],
-    [[0, 1, 0], [1, 1, 1]],
-    [[1, 0, 0], [1, 1, 1]],
-    [[0, 0, 1], [1, 1, 1]],
-    [[1, 1, 0], [0, 1, 1]],
-    [[0, 1, 1], [1, 1, 0]],
-]
+SHAPES = [[[1, 1, 1, 1]],
+    [[1, 1],
+     [1, 1]],
+    [[0, 1, 0],
+     [1, 1, 1]],
+    [[1, 0, 0],
+     [1, 1, 1]],
+    [[0, 0, 1],
+     [1, 1, 1]],
+    [[1, 1, 0],
+     [0, 1, 1]],
+    [[0, 1, 1],
+     [1, 1, 0]]]
 
 
 class Tetris:
     def __init__(self):
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption("Tetris")
+        pygame.display.set_caption("Simple Tetris v 1.0")
         self.clock = pygame.time.Clock()
         self.grid = [[0] * COLUMNS for _ in range(ROWS)]
         self.current_shape = self.new_shape()
@@ -108,8 +112,6 @@ class Tetris:
                             self.current_shape.y -= 1
                     elif event.key == pygame.K_UP:
                         self.current_shape.rotate()
-                        if self.check_collision(self.current_shape):
-                            self.current_shape.rotate(-1)
 
             self.current_shape.y += 1
             if self.check_collision(self.current_shape):
